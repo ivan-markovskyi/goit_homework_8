@@ -25,8 +25,13 @@ def is_birthday_next_week (user: dict) -> bool:
     user_bd = user['birthday']
     user_bd = user_bd.replace(year=current_date.year)
     delta_days = user_bd - current_date 
-       
-    if 0 <= delta_days.days < 6:
+    
+    if current_date.weekday() == 0:
+        condition = (delta_days.days <= 4) and (delta_days.days >= -2)
+    else:
+        condition = (delta_days.days <= 6) and (delta_days.days >= 0)
+
+    if condition:
         return True
     return False  
 
